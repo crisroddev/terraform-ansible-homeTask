@@ -1,18 +1,9 @@
-name: 'Terraform'
+name: 'Terraform Lint'
 
 on:
   push:
     branches: [ "master" ]
-  workflow_dispatch:
-    inputs:
-      lintTerraform:
-        description: 'Waiting for linting to succed'
-        required: true
-
-env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_REGION: us-east-2
+  
 
 jobs:
   lintTerraform:
@@ -33,4 +24,12 @@ jobs:
           unzip tflint.zip
           sudo mv tflint /usr/local/bin/
       
-      - name: 
+      - name: Run TFLint
+        run: tflint
+
+      - name: Output Results
+        run: cat tflint.log
+      
+      - name: Fail Job on Lint Errors
+        if: ${{ success() && contains(steps.run_tflint.outputs.stdout, "ERROR:") }}
+        run: exit 1
