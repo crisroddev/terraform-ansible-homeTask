@@ -78,7 +78,6 @@ if [ "$ID" == "amzn" ]; then
     sudo yum install -y ansible
   else
     error_exit
-  fi
 fi
 
 ## Ubuntu
