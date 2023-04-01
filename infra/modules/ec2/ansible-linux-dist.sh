@@ -13,7 +13,7 @@
 # ----------------
 error_exit() {
   echo ""
-  echo "$NAME is not supported by this script"
+  echo "$PRETTY_NAME is not supported by this script"
   echo
   exit 1
 }
@@ -41,7 +41,7 @@ echo "Getting OS version..."
 # Install Ansible
 # ---------------
 echo ""
-echo "Installing Ansible for: $NAME..."
+echo "Installing Ansible for: $PRETTY_NAME..."
 ## Fedora (version 20 and greater)
 if [ "$ID" == "fedora" ]; then
   ## Use dnf > 21
@@ -69,7 +69,7 @@ if [ "$ID" == "centos" ]; then
 fi
 
 ## Amazon Linux
-if [ "$Name" == "Amazon Linux" ]; then
+if [ "$ID" == "amzn" ]; then
     echo "Checkinf if Ansibe is enabled"
     sudo amazon-linux-extras list | grep ansible2
     echo "If not, enable the ansible repo."
