@@ -5,7 +5,7 @@
 __Terraform__
 1. Open your AWS console
 
-2. Change your region to `us-east-2`. From the AWS console create an S3 bucket in `us-east-2` to store backend terraform state e.g `infra-tf-cloud-home-task`
+2. Change your region to `us-east-2`. From the AWS console create an S3 bucket in `us-east-2` to store backend terraform state e.g `infra-tf-cloud`
 
 3. Create a private key pair for your EC2 instance called e.g `ec2-key-home-task`
 

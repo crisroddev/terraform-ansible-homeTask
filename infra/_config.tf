@@ -1,13 +1,13 @@
 terraform {
    backend "s3" {
-     bucket = "ec2-key-home-task"
+     bucket = "infra-tf-cloud"
      key    = "terraform/terraform.tfstate"
-     region = "${var.aws_region}"
+     region = "us-east-2"
    }
  }
 
  provider "aws" {
-   region = "${var.aws_region}"
+   region = var.aws_region
 
    default_tags {
      tags = local.tags
