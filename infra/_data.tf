@@ -15,3 +15,7 @@ data "aws_caller_identity" "current" {}
 
     owners = ["099720109477"] # Canonical
 }
+
+data "external" "myipaddr" {
+    program = ["bash", "-c", "curl -s 'https://ipinfo.io/json'"]
+}

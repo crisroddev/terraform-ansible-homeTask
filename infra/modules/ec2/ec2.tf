@@ -5,6 +5,7 @@ resource "aws_instance" "ubuntu-server" {
   ami           = var.aws_ami
   instance_type = "t3.micro"
   key_name = "ec2-key-home-task"
+  user_data = "${file("${path.module}/install_ansible.sh")}"
   tags = {
     Name = "ubuntu"
   }
@@ -29,7 +30,7 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 22    
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["76.22.12.11/32"] 
   }
 
   ingress {

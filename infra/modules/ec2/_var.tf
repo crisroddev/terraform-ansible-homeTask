@@ -1,5 +1,9 @@
 variable "name" {}
 variable "aws_ami" {}
+# variable "myipaddr" {
+#   description = "My Ip Address"
+#   type = string
+# }
 variable "account" {}
 variable "private_subnet_ids" {}
 variable "vpc_id" {}

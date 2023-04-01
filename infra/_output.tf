@@ -9,3 +9,7 @@ output "account_id" {
  output "caller_user" {
    value = data.aws_caller_identity.current.user_id
  }
+
+ output "my_public_ip" {
+   value = "${data.external.myipaddr.result.ip}"
+ }
