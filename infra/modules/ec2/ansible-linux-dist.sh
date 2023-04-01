@@ -69,7 +69,7 @@ if [ "$ID" == "centos" ]; then
 fi
 
 ## Amazon Linux
-if [ "$ID" == "Amazon Linux" ]; then
+if [ "$Name" == "Amazon Linux" ]; then
     echo "Checkinf if Ansibe is enabled"
     sudo amazon-linux-extras list | grep ansible2
     echo "If not, enable the ansible repo."
