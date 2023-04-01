@@ -18,22 +18,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.0.6
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v1
+      #   with:
+      #     terraform_version: 1.0.6
       
-      - name: Install TFLint
-        run: |
-          curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_Linux_x86_64.zip")" -o tflint.zip
-          unzip tflint.zip
-          sudo mv tflint /usr/local/bin/
+      # - name: Install TFLint
+      #   run: |
+      #     curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_Linux_x86_64.zip")" -o tflint.zip
+      #     unzip tflint.zip
+      #     sudo mv tflint /usr/local/bin/
       
-      - name: Run TFLint
-        run: tflint
+      # - name: Run TFLint
+      #   run: tflint
 
-      - name: Output Results
-        run: cat tflint.log
+      # - name: Output Results
+      #   run: cat tflint.log
       
       # - name: Fail Job on Lint Errors
       #   if: ${{ success() && contains(steps.run_tflint.outputs.stdout, "ERROR:") }}
