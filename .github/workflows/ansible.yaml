@@ -8,6 +8,8 @@ jobs:
     ansibleDeploy:
       runs-on: ubuntu-latest
       steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
         - name: Run Ansible Playbook
           # run: cd infra/modules/ec2 && ansible-playbook playbook.yaml -i inventory --user ubuntu --key-file=ec2-key-home-task.pem
           run: ls
