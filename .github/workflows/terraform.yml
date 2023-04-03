@@ -35,14 +35,9 @@ jobs:
         id: validate
         run: cd infra && terraform validate -no-color
       
-      # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      #   run: cd infra && terraform apply -auto-approve -input=false
-  run-playbooks:
-    runs-on: self-hosted
-    steps:
-      - name: Run Ansible Playbook
-        run: cd infra/modules/ec2 ansible-playbook playbook.yaml -i hosts --user ubuntu --key-file=ec2-key-home-task.pem
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: cd infra && terraform apply -auto-approve -input=false
 
 
       # - name: Terraform destroy
