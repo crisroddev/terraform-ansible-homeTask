@@ -29,11 +29,11 @@ jobs:
       
       - name: Terraform init
         id: init
-        run: terraform init
+        run: cd infra terraform init
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: cd infra && terraform validate -no-color
       
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
