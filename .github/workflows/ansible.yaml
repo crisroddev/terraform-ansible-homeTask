@@ -6,7 +6,7 @@ on:
 
 jobs:
     ansibleDeploy:
-      runs-on: self-hosted
+      runs-on: ubuntu-latest
       steps:
         - name: Run Ansible Playbook
           run: cd infra/modules/ec2 && ansible-playbook playbook.yaml -i inventory --user ubuntu --key-file=ec2-key-home-task.pem
