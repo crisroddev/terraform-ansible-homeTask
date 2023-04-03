@@ -10,54 +10,10 @@ resource "aws_instance" "ubuntu-server" {
     Name = "ubuntu"
   }
 
-  # provisioner "file" {
-  #   source = "playbook.yaml"
-  #   destination = "./"
-  #   connection {
-  #     host          = aws_instance.ubuntu-server.public_dns
-  #     type          = "ssh"
-  #     user          = "ubuntu"
-  #     private_key   = "${file("${path.module}/ec2-key-home-task.pem")}"
-  #   }
-  # }
-
   provisioner "local-exec" {
     command = "echo ${aws_instance.ubuntu-server.public_dns} > ./modules/ec2/inventory"
   }
-
-  provisioner "file" {
-     connection {
-       host          = aws_instance.ubuntu-server.public_dns
-       type          = "ssh"
-       user          = "ubuntu"
-       private_key   = "${file("${path.module}/ec2-key-home-task.pem")}"
-    }
-    source      = "./modules/ec2/files/security_agent_config.yaml"
-    destination = "security_agent_config.yaml" 
-  }
-
-  provisioner "file" {
-     connection {
-       host          = aws_instance.ubuntu-server.public_dns
-       type          = "ssh"
-       user          = "ubuntu"
-       private_key   = "${file("${path.module}/ec2-key-home-task.pem")}"
-    }
-    source      = "./modules/ec2/files/security_agent_installer.sh"
-    destination = "security_agent_installer.sh" 
-  }
-
-  provisioner "remote-exec" {
-    inline = [ "chmod +x ~/security_agent_installer.sh" ]
-    connection {
-      host          = aws_instance.ubuntu-server.public_dns
-      type          = "ssh"
-      user          = "ubuntu"
-      private_key   = "${file("${path.module}/ec2-key-home-task.pem")}"
-    }
-  }
 }
-
 output "ip" {
   value = aws_instance.ubuntu-server.public_ip
 }

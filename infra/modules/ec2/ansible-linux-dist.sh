@@ -74,7 +74,7 @@ if [ "$ID" == "ubuntu" ]; then
       echo "Adding PPA, then installing Ansible"
       sudo apt-add-repository ppa:ansible/ansible -y
       sudo apt-get update
-      sudo apt-get install software-properties-common ansible python-apt -y
+      sudo apt-get install software-properties-common ansible python-apt -yecho "Install AWS CLI"
       ;;
     18.04)
       echo "Importing Ansible signing keys"
@@ -91,6 +91,8 @@ if [ "$ID" == "ubuntu" ]; then
       sudo apt install software-properties-common -y
       sudo add-apt-repository --yes --update ppa:ansible/ansible
       sudo apt install ansible -y
+      echo "Install AWS CLI"
+      sudo apt  install awscli -y
     ;;
     *) 
       error_exit
