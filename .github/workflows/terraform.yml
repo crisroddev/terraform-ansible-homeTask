@@ -27,18 +27,23 @@ jobs:
         with:
           terraform_version: 1.0.6
       
-      - name: Terraform init
-        id: init
-        run: cd infra && terraform init
+      # - name: Terraform init
+      #   id: init
+      #   run: cd infra && terraform init
       
-      - name: Terraform Validate
-        id: validate
-        run: cd infra && terraform validate -no-color
+      # - name: Terraform Validate
+      #   id: validate
+      #   run: cd infra && terraform validate -no-color
       
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: cd infra && terraform apply -auto-approve -input=false
+      # - name: Terraform Apply
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.KEY }}
+      #     port: ${{ secrets.PORT }}
+      #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      #   run: cd infra && terraform apply -auto-approve -input=false
 
 
-      # - name: Terraform destroy
-      #   run: cd infra && terraform destroy
+      - name: Terraform destroy
+        run: cd infra && terraform destroy
