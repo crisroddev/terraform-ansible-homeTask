@@ -10,4 +10,4 @@ jobs:
       steps:
         - name: Run Ansible Playbook
           # run: cd infra/modules/ec2 && ansible-playbook playbook.yaml -i inventory --user ubuntu --key-file=ec2-key-home-task.pem
-          run: cd infra && pwd && ls
+          run: ls
