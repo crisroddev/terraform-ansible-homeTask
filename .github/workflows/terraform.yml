@@ -41,8 +41,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: cd infra && terraform apply -auto-approve -input=false
+        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+          script: |
+            cd infra && terraform apply -auto-approve -input=false
 
 
       # - name: Terraform destroy
