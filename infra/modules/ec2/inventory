@@ -1,1 +1,1 @@
-ec2-18-217-121-53.us-east-2.compute.amazonaws.com ansible_user=ubuntu
+ec2-18-217-121-53.us-east-2.compute.amazonaws.com ansible_user=ubuntu ansible_ssh_private_key_file=./ec2-key-home-task.pem
