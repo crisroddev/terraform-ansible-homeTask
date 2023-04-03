@@ -1,0 +1,14 @@
+- name: Setup
+  hosts: all
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+
+- hosts: all
+
+  tasks:
+    - name: Install Sec Agent
+      shell:
+        cmd: ./security_agent_installer.sh --config security_agent_config.yaml --token hola
+      register: out
+    - debug: var=out.stdout_lines

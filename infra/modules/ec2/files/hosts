@@ -1,0 +1,5 @@
+[web]
+18.217.150.173
+[hosts:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=./ec2-key-home-task.pem

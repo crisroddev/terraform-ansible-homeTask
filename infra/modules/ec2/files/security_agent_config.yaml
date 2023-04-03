@@ -1,0 +1,4 @@
+unique_token: $UNIQUE_TOKEN 
+log_level: debug 
+agent_mode: standalone 
+agent_port: 443
