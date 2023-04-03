@@ -35,10 +35,10 @@ jobs:
         id: validate
         run: cd infra && terraform validate -no-color
       
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: cd infra && terraform apply -auto-approve -input=false
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      #   run: cd infra && terraform apply -auto-approve -input=false
 
 
-      # - name: Terraform destroy
-      #   run: cd infra && terraform destroy
+      - name: Terraform destroy
+        run: cd infra && terraform destroy
