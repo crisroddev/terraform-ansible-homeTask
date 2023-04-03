@@ -1,0 +1,12 @@
+name: 'Ansible'
+on:
+    push:
+      branches: [ master ]
+    workflow_dispatch:
+
+jobs:
+    ansibleDeploy:
+      runs-on: self-hosted
+      steps:
+        - name: Run Ansible Playbook
+          run: cd infra/modules/ec2 ansible-playbook playbook.yaml -i hosts --user ubuntu --key-file=ec2-key-home-task.pem
