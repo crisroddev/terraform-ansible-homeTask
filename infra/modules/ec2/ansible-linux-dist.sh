@@ -3,7 +3,7 @@
 # The following distros are supported:                                    #
 #   - Fedora 20 and greater                                               #
 #   - CentOS 7                                                            #
-#   - Ubuntu 16.04, 17.10, 18.04, 22.*                                    #
+#   - Ubuntu                                  #
 #                                                                         #
 # ------------------------------------------------------------------------#
 
@@ -45,11 +45,11 @@ echo "Installing Ansible for: $PRETTY_NAME..."
 if [ "$ID" == "fedora" ]; then
   ## Use dnf > 21
   if [ $VERSION_ID -gt 21 ]; then
-    echo "Using: sudo dnf install -y ansible"
+    echo "Installing Ansible"
     sudo dnf install -y ansible
   ## Use yum for 20 - 21
   elif [ $VERSION_ID -eq 20 ] || [ $VERSION_ID -eq 21 ]; then
-    echo "Using: sudo yum -y install ansible"
+    echo "Installing Ansible"
     sudo yum -y install ansible
   else
     error_exit 
