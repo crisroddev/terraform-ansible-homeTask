@@ -15,6 +15,7 @@ env:
   AWS_REGION: us-east-2
 
 jobs:
+
   terraform:
     runs-on: ubuntu-latest
 
@@ -22,23 +23,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - name: Configure AWS Credentials
+        uses: aws-action/configure-aws-credentials@v1
         with:
-          terraform_version: 1.0.6
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-2
       
-      - name: Terraform init
-        id: init
-        run: cd infra && terraform init
+      - name: SSh to EC2 instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-18-217-121-53.us-east-2.compute.amazonaws.com
+          username: ubuntu
+          password: ${{ secrets.PEMFILE }}
+          port: 22
+          script: |
+            aws s3 ls
+
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v2
+      #   with:
+      #     terraform_version: 1.0.6
       
-      - name: Terraform Validate
-        id: validate
-        run: cd infra && terraform validate -no-color
+      # - name: Terraform init
+      #   id: init
+      #   run: cd infra && terraform init
+      
+      # - name: Terraform Validate
+      #   id: validate
+      #   run: cd infra && terraform validate -no-color
       
       # - name: Terraform Apply
       #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       #   run: cd infra && terraform apply -auto-approve -input=false
 
 
-      - name: Terraform destroy
-        run: cd infra && terraform destroy
+      # - name: Terraform destroy
+      #   run: cd infra && terraform destroy
