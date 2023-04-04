@@ -2,18 +2,18 @@
 # Internet Gateway #
 ####################
 resource "aws_internet_gateway" "this" {
-   count = length(var.azs) > 0 ? 1 : 0
+  count = length(var.azs) > 0 ? 1 : 0
 
-   vpc_id = aws_vpc.this.id
+  vpc_id = aws_vpc.this.id
 
-   tags = merge(
-     {
-       "Name" = format("%s", var.name)
-     }
-   )
- }
+  tags = merge(
+    {
+      "Name" = format("%s", var.name)
+    }
+  )
+}
 
- # Publiс routes
+# Publiс routes
 resource "aws_route_table" "public" {
   count = length(var.azs) > 0 ? 1 : 0
 
@@ -41,9 +41,9 @@ resource "aws_route" "public_internet_gateway" {
 # NAT Gateway #
 ###############
 locals {
-   nat_gateway_count = 1
-   nat_gateway_ips = split(
-     ",", join(",", aws_eip.nat.*.id),
+  nat_gateway_count = 1
+  nat_gateway_ips = split(
+    ",", join(",", aws_eip.nat.*.id),
   )
 }
 
@@ -83,10 +83,10 @@ resource "aws_nat_gateway" "this" {
     }
   )
   depends_on = [aws_internet_gateway.this]
- }
+}
 
 resource "aws_route" "private_nat_gateway" {
-  count = length(var.azs)
+  count                  = length(var.azs)
   route_table_id         = element(aws_route_table.private.*.id, count.index)
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = element(aws_nat_gateway.this.*.id, count.index)
@@ -109,9 +109,9 @@ resource "aws_route_table" "private" {
     }
   )
   lifecycle {
-     # When attaching VPN gateways it is common to define aws_vpn_gateway_route_propagation
-     # resources that manipulate the attributes of the routing table (typically for the private subnets)
-     ignore_changes = [propagating_vgws]
+    # When attaching VPN gateways it is common to define aws_vpn_gateway_route_propagation
+    # resources that manipulate the attributes of the routing table (typically for the private subnets)
+    ignore_changes = [propagating_vgws]
   }
 }
 

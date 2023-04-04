@@ -4,8 +4,8 @@
 resource "aws_instance" "ubuntu-server" {
   ami           = var.aws_ami
   instance_type = "t3.micro"
-  key_name = "ec2-key-home-task"
-  user_data = "${file("${path.module}/ansible-linux-dist.sh")}"
+  key_name      = "ec2-key-home-task"
+  user_data     = file("${path.module}/ansible-linux-dist.sh")
   tags = {
     Name = "ubuntu"
   }
@@ -26,27 +26,27 @@ output "publicName" {
 # Security Groups #
 ###################
 resource "aws_security_group" "ec2_sg" {
-  name        = "ec2_sg"
-  vpc_id      = var.vpc_id
+  name   = "ec2_sg"
+  vpc_id = var.vpc_id
 
-  ingress {    
+  ingress {
     description = "HTTP port"
-    from_port   = 80    
+    from_port   = 80
     to_port     = 80
-    protocol    = "tcp"    
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
     description = "ssh port"
-    from_port   = 22    
+    from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] 
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     description = "HTTPS port"
-    from_port   = 443    
+    from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
