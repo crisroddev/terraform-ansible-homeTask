@@ -35,7 +35,7 @@ jobs:
         with:
           host: ec2-18-217-121-53.us-east-2.compute.amazonaws.com
           username: ubuntu
-          key: ${{ secrets.KEYKEY }}
+          key: ${{ secrets.TESTKEY }}
           port: 22
           script: |
             aws s3 ls
